@@ -1,5 +1,6 @@
 import axios from "axios";
 
+require("dotenv").config();
 const YELP_API_KEY = process.env.YELP_API_KEY;
 const API_ENDPOINT = "https://api.yelp.com/v3";
 

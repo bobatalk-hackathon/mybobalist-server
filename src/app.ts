@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import bobaRoutes from "./routes/bobaRoutes";
 
+require("dotenv").config();
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
