@@ -10,7 +10,33 @@ export const getUser = async (uid: string) => {
   return userRecord;
 };
 
-export const updateUserProfile = async (uid: string, profileData: any) => {
-  await db.collection("profiles").doc(uid).set(profileData, { merge: true });
-  return profileData;
+export const getUserByEmail = async (email: string) => {
+  const userRecord = await auth.getUserByEmail(email);
+  return userRecord;
+};
+
+export const createUserProfile = async (
+  uid: string,
+  email: string,
+  firstName: string,
+  lastName: string,
+  location: string,
+  favoriteBoba?: string
+) => {
+  const userRef = db.collection("userprofile").doc(uid);
+  await userRef.set({
+    uid,
+    email,
+    firstName,
+    lastName,
+    location,
+    favoriteBoba,
+  });
+  return { uid, email, firstName, lastName, location, favoriteBoba };
+};
+
+export const getUserProfileById = async (uid: string) => {
+  const userRef = db.collection("userprofile").doc(uid);
+  const userProfile = await userRef.get();
+  return userProfile.data();
 };
